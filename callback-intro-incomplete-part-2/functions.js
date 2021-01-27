@@ -10,7 +10,6 @@ const indexOf = function (array, target) {
       result = index;
     }
   });
-
   return result;
 };
 
@@ -37,30 +36,48 @@ const filter = function (collection, callBack) {
   })
   return result
 }
-
+// from like 39 up to the function on 33 is the callback
 const map = function (collection, iterator) {
   let result = [];
-
   each(collection, function (item) {
     result.push(iterator(item))
   })
   return result
 };
 
-const reject = function (collection, test) {
+const reject = function (collection, callbackTest) {
+  return filter(collection, function (item) {
+    return !callbackTest(item)
+    // isEven
+  })
+}
+// value is the number that is put into the test
+// collection = full array
+// element = single item of array
+
+
+// const uniq = function (array) {
+//   let result = [];
+//   filter(array, function(item){
+//     if (!result.includes(item)) {
+//       result.push(item)
+//     }
+//   })
+//   return result
+// }
+
+const uniq = function (array) {
   let result = [];
-  filter(collection, (element) => {
-    if (test(element) !== true) {
-      result.push(element)
-    }
-  });
-  return result;
-}  
+  each(array, function(element, index, collection) {
+    if (indexOf(result, element) === -1)
+    result.push(element)
+  })
+  return result
+}
 
-
-const uniq = function (array) { };
-
-const reduce = function (collection, iterator, accumulator) { };
+const reduce = function (collection, iterator, accumulator) {
+  
+};
 
 module.exports = {
   filter,
